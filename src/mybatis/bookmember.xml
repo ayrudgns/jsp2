@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="book">
+	<!-- BookMember vo = mapper.selectOne("login", map);에서 id 속성값이 중복되는 경우에 namespace로 구분한다. "book.login"(= namespace.id) -->
+	<select id="login" parameterType="java.util.Map" resultType="vo.BookMember">
+		SELECT NAME, EMAIL, TEL FROM BOOK_MEMBER WHERE EMAIL = #{email} AND PASSWORD = #{password}
+	</select>
+</mapper>

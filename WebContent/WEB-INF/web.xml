@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee" 
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" 
+	id="WebApp_ID" version="4.0">
+  <display-name>jsp2</display-name>
+  <!-- 
+  		web.xml은 배포 기술(Deploy Descriptor) 파일이고, 서버의 web.xml 값 중에서
+  		현재 애플리케이션 설정을 변경할 항목을 작성한다.
+  -->
+  
+  <!--
+  		<welcome-file-list> : http://localhost:8082/jsp2/와 같이 contextPath만 있을 때,
+  		즉 요청에 jsp, html, htm 등의 파일을 특정하지 않았을 때 실행할 페이지를 list 내용 순서대로 찾아서 실행하는 것이다.
+  		==> WebContent 폴더 아래에 index.jsp 만들어서 실행 확인하기!
+  		==> 목록에 있는 파일이 하나도 존재하지 않는 경우 404 error 발생!
+  -->
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  
+  <!-- session timeout 시간 : 서버는 30분! 5분으로 설정 변경 -->
+    <session-config>
+        <session-timeout>5</session-timeout>
+    </session-config>
+    
+   <!-- 에러 페이지 설정하기 : http 상태 코드(404, 500 등) 또는 Exception 종류에 따라 설정하거나, 모든 에러에 대해 하나의 페이지(파일) 설정 -->
+   <!-- 에러(Exception)가 발생하면 설정된 오류 페이지로 Forward(전달) => url이 변경되지 않는다. -->
+   <error-page>
+   		<error-code>404</error-code>
+   		<location>/error/error404.jsp</location>
+   </error-page>
+   
+   <error-page>
+   		<exception-type>java.lang.Exception</exception-type>
+   		<location>/error/errorAll.jsp</location>
+   </error-page>
+
+  
+</web-app>

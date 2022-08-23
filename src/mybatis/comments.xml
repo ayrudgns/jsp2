@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="comments">
+ 	<select id="getComments" parameterType="int" resultType="board.vo.Comment">
+ 		SELECT * FROM COMMENTS WHERE MREF = #{mref}
+ 	</select>
+ 	
+ 	<insert id="insert" parameterType="board.vo.Comment">
+ 		INSERT INTO COMMENTS (IDX, MREF, WRITER, CONTENT) VALUES
+			(CMT_IDX_SEQ.NEXTVAL, #{mref}, #{writer}, #{content})
+ 	</insert>
+ 
+ 	<update id="updateCmtCount" parameterType="int">	<!-- freeboard 테이블 댓글 개수 업데이트 -->
+ 		UPDATE FREEBOARD SET COMMENTCOUNT = (
+			SELECT COUNT(*) FROM COMMENTS WHERE MREF = #{mref})
+			WHERE IDX = #{mref}
+ 	</update>
+ 
+ 	<delete id="delete" parameterType="int">
+ 		DELETE FROM COMMENTS c WHERE IDX = #{idx}
+ 	</delete>
+ </mapper>
